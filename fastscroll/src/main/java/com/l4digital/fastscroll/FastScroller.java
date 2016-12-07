@@ -344,7 +344,7 @@ public class FastScroller extends LinearLayout {
             }
 
             int targetPos = getValueInRange(0, itemCount - 1, (int) (proportion * (float) itemCount));
-            ((LinearLayoutManager) mRecyclerView.getLayoutManager()).scrollToPositionWithOffset(targetPos, 0);
+            mRecyclerView.getLayoutManager().scrollToPosition(targetPos);
 
             if (mSectionIndexer != null) {
                 mBubbleView.setText(mSectionIndexer.getSectionText(targetPos));
@@ -355,7 +355,7 @@ public class FastScroller extends LinearLayout {
     private float getScrollProportion(RecyclerView recyclerView) {
         final int verticalScrollOffset = recyclerView.computeVerticalScrollOffset();
         final int verticalScrollRange = recyclerView.computeVerticalScrollRange();
-        float proportion = (float) verticalScrollOffset / ((float) verticalScrollRange - mHeight);
+        float proportion = verticalScrollOffset / (float) verticalScrollRange;
         return mHeight * proportion;
     }
 
